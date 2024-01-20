@@ -1,5 +1,19 @@
 import { Theme, createTheme } from '@mui/material'
 
+declare module '@mui/material/styles' {
+  interface Theme {
+    boxShadows: {
+      container: string
+    }
+  }
+  // allow configuration using `createTheme`
+  interface ThemeOptions {
+    boxShadows?: {
+      container?: string
+    }
+  }
+}
+
 const white = '#fff'
 
 export const theme: Theme = createTheme({
@@ -10,6 +24,52 @@ export const theme: Theme = createTheme({
       md: 1024,
       lg: 1280,
       xl: 1920,
+    },
+  },
+  boxShadows: {
+    container: '0px 8px 48px -12px rgba(16, 24, 40, 0.15)',
+  },
+  components: {
+    MuiInputBase: {
+      styleOverrides: {
+        input: state => ({
+          borderRadius: `${state.theme.spacing(3.5)}`,
+          padding: `${state.theme.spacing(1.25)} ${state.theme.spacing(2)}`,
+          fontSize: '1rem',
+          border: `1px solid ${state.theme.palette.grey[300]}`,
+          background: state.theme.palette.background.paper,
+          '::placeholder': {
+            color: state.theme.palette.grey[400],
+          },
+        }),
+      },
+    },
+
+    MuiButton: {
+      defaultProps: {
+        variant: 'contained',
+        color: 'primary',
+      },
+      styleOverrides: {
+        root: state => ({
+          textTransform: 'none',
+          padding: `${state.theme.spacing(1.25)} ${state.theme.spacing(2.5)}`,
+          borderRadius: `${state.theme.spacing(3.5)}`,
+        }),
+        containedPrimary: state => ({
+          backgroundColor: state.theme.palette.primary.main,
+          color: state.theme.palette.primary.contrastText,
+        }),
+      },
+    },
+  },
+
+  typography: {
+    fontFamily: 'Inter',
+    h2: {
+      fontSize: '1.125rem',
+      lineHeight: '1.5rem',
+      fontWeight: 600,
     },
   },
   palette: {
