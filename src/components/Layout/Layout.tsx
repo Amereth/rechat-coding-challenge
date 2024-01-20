@@ -10,8 +10,6 @@ export const Layout = ({ children }: PropsWithChildren) => {
 }
 
 const Background = styled(Box)(({ theme }) => ({
-  // display: 'flex',
-  // flexDirection: 'column',
   alignItems: 'stretch',
   height: '100vh',
   padding: '24px 0',
@@ -19,11 +17,6 @@ const Background = styled(Box)(({ theme }) => ({
 }))
 
 const Container = styled(Box)(({ theme }) => ({
-  // display: 'flex',
-  // flexDirection: 'column',
-  // alignItems: 'stretch',
-  // flexGrow: 1,
-  // width: '100%',
   margin: '0 auto',
   padding: '0 16px',
 
