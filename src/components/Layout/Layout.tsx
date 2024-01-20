@@ -18,7 +18,6 @@ const Background = styled(Box)(({ theme }) => ({
 
 const Container = styled(Box)(({ theme }) => ({
   margin: '0 auto',
-  padding: '0 16px',
 
   [theme.breakpoints.up('sm')]: {
     maxWidth: '648px',

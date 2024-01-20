@@ -10,11 +10,11 @@ type Props = {
   breadcrumb: string
 }
 
-export const Breadcrumbs = ({ breadcrumb }: Props) => {
+export const Breadcrumbs = ({ breadcrumb, ...props }: Props) => {
   const { palette } = useTheme()
 
   return (
-    <MuiBreadcrumbs separator={<ChevronRight />}>
+    <MuiBreadcrumbs separator={<ChevronRight />} {...props}>
       <Breadcrumb color={palette.primary.main}>Task Management</Breadcrumb>
       <Breadcrumb color={palette.grey[600]}>{breadcrumb}</Breadcrumb>
     </MuiBreadcrumbs>

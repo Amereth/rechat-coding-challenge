@@ -36,10 +36,11 @@ export const theme: Theme = createTheme({
           borderRadius: `${state.theme.spacing(3.5)}`,
           padding: `${state.theme.spacing(1.25)} ${state.theme.spacing(2)}`,
           fontSize: '1rem',
-          border: `1px solid ${state.theme.palette.grey[300]}`,
+          border: `1px solid`,
+          borderColor: state.theme.palette.grey[300],
           background: state.theme.palette.background.paper,
           '::placeholder': {
-            color: state.theme.palette.grey[400],
+            color: state.theme.palette.grey[600],
           },
         }),
       },
