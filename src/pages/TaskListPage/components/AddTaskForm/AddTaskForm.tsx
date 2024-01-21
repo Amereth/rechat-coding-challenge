@@ -15,7 +15,9 @@ import { useTaskStorage } from '../../../../hooks/useTaskStorage'
 import { Task } from '../../../../types'
 import { createTask } from './utils'
 
-const isFieldValid = (title: string) => title.length > 3
+const isTitleValid = (title: string) => title.length >= 3 && title.length <= 100
+const isDescriptionValid = (title: string) =>
+  title.length >= 3 && title.length <= 100
 
 export const AddTaskForm = () => {
   const { spacing } = useTheme()
@@ -32,7 +34,7 @@ export const AddTaskForm = () => {
     setSubmitted(true)
 
     const isTaskValid =
-      isFieldValid(formState.title) && isFieldValid(formState.description)
+      isTitleValid(formState.title) && isDescriptionValid(formState.description)
 
     if (!isTaskValid) return
 
@@ -45,9 +47,6 @@ export const AddTaskForm = () => {
     setSubmitted(false)
   }
 
-  const isTitleValid = isFieldValid(formState.title)
-  const isDescriptionValid = isFieldValid(formState.description)
-
   return (
     <Container onSubmit={onSubmit}>
       <Header>
@@ -57,6 +56,9 @@ export const AddTaskForm = () => {
 
       <FormControl fullWidth>
         <InputBase
+          inputProps={{
+            minLength: 4,
+          }}
           placeholder="Title"
           value={formState.title}
           onChange={event =>
@@ -70,7 +72,8 @@ export const AddTaskForm = () => {
         />
         {isSubmitted && (
           <FormHelperText error>
-            {!isTitleValid && 'Title must be at least 3 characters long'}
+            {!isTitleValid(formState.title) &&
+              'Title must be between 3 and 100 characters long'}
           </FormHelperText>
         )}
       </FormControl>
@@ -91,7 +94,7 @@ export const AddTaskForm = () => {
         />
         {isSubmitted && (
           <FormHelperText error>
-            {!isDescriptionValid &&
+            {!isDescriptionValid(formState.description) &&
               'Description must be at least 10 characters long'}
           </FormHelperText>
         )}
