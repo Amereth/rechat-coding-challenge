@@ -68,9 +68,19 @@ export const theme: Theme = createTheme({
   typography: {
     fontFamily: 'Inter',
     h2: {
+      fontSize: '1.5rem',
+      lineHeight: '1.5rem',
+      fontWeight: 600,
+    },
+    h3: {
       fontSize: '1.125rem',
       lineHeight: '1.5rem',
       fontWeight: 600,
+    },
+    body2: {
+      fontSize: '0.875rem',
+      lineHeight: '1.5rem',
+      fontWeight: 400,
     },
   },
   palette: {

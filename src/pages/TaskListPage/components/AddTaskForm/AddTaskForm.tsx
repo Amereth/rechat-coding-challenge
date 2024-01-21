@@ -52,7 +52,7 @@ export const AddTaskForm = () => {
     <Container onSubmit={onSubmit}>
       <Header>
         <FileIcon />
-        <Typography variant="h2">Add a new Task</Typography>
+        <Typography variant="h3">Add a new Task</Typography>
       </Header>
 
       <FormControl fullWidth>
