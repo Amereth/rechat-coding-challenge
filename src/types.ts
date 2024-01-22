@@ -1,4 +1,4 @@
-export type Status =
+export type TaskStatus =
   | 'todo'
   | 'in-progress'
   | 'blocked'
@@ -10,7 +10,7 @@ export type Task = {
   id: string
   title: string
   description: string
-  status: Status
+  status: TaskStatus
   createdAt: Date
   updatedAt: string | null
 }

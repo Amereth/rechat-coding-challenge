@@ -4,12 +4,14 @@ declare module '@mui/material/styles' {
   interface Theme {
     boxShadows: {
       container: string
+      menu: string
     }
   }
   // allow configuration using `createTheme`
   interface ThemeOptions {
-    boxShadows?: {
-      container?: string
+    boxShadows: {
+      container: string
+      menu: string
     }
   }
 }
@@ -28,6 +30,7 @@ export const theme: Theme = createTheme({
   },
   boxShadows: {
     container: '0px 8px 48px -12px rgba(16, 24, 40, 0.15)',
+    menu: '0px 10px 32px -4px rgba(0, 0, 0, 0.10), 0px 6px 14px -6px rgba(0, 0, 0, 0.12)',
   },
   components: {
     MuiInputBase: {
@@ -63,6 +66,15 @@ export const theme: Theme = createTheme({
         }),
       },
     },
+
+    MuiMenu: {
+      styleOverrides: {
+        paper: state => ({
+          borderRadius: state.theme.spacing(2),
+          boxShadow: state.theme.boxShadows.menu,
+        }),
+      },
+    },
   },
 
   typography: {
@@ -77,6 +89,11 @@ export const theme: Theme = createTheme({
       lineHeight: '1.5rem',
       fontWeight: 600,
     },
+    h4: {
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+      fontWeight: 600,
+    },
     body2: {
       fontSize: '0.875rem',
       lineHeight: '1.5rem',
@@ -87,6 +104,7 @@ export const theme: Theme = createTheme({
       lineHeight: '1rem',
     },
   },
+
   palette: {
     primary: {
       main: '#000000',
@@ -121,7 +139,7 @@ export const theme: Theme = createTheme({
     success: {
       main: '#4CAF50',
       light: '#81C784',
-      dark: '#388E3C',
+      dark: '#008060',
       contrastText: 'rgba(0, 0, 0, 0.87)',
     },
     grey: {
