@@ -82,6 +82,10 @@ export const theme: Theme = createTheme({
       lineHeight: '1.5rem',
       fontWeight: 400,
     },
+    subtitle1: {
+      fontSize: '0.75rem',
+      lineHeight: '1rem',
+    },
   },
   palette: {
     primary: {
