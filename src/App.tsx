@@ -2,7 +2,6 @@ import { CircularProgress, ThemeProvider } from '@mui/material'
 import { theme } from './theme'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import { TaskListPage } from './pages/TaskListPage'
-import { Layout } from './components/Layout'
 
 const router = createBrowserRouter([
   {
@@ -14,12 +13,7 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
-        <RouterProvider
-          router={router}
-          fallbackElement={<CircularProgress />}
-        />
-      </Layout>
+      <RouterProvider router={router} fallbackElement={<CircularProgress />} />
     </ThemeProvider>
   )
 }

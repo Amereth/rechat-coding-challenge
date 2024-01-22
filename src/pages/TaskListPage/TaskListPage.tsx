@@ -1,17 +1,18 @@
-import { Box, styled, useTheme } from '@mui/material'
+import { styled, useTheme } from '@mui/material'
 import { Breadcrumbs } from '../../components/Breadcrumbs'
 import { AddTaskForm } from './components/AddTaskForm'
 import { TaskList } from './components/TaskList'
+import { LayoutContainer } from '../../components/LayoutContainer'
 
 export const TaskListPage = () => {
   const { spacing } = useTheme()
 
   return (
-    <Box>
+    <LayoutContainer>
       <StyledBreadcrumbs breadcrumb="Home" />
       <AddTaskForm />
       <TaskList sx={{ mt: spacing(6) }} />
-    </Box>
+    </LayoutContainer>
   )
 }
 

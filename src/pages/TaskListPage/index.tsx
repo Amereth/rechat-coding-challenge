@@ -1,1 +1,1 @@
-export * from './TaskListPage'
+export { TaskListPage } from './TaskListPage'
