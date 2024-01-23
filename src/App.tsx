@@ -1,14 +1,7 @@
 import { CircularProgress, ThemeProvider } from '@mui/material'
 import { theme } from './theme'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { TaskListPage } from './pages/TaskListPage'
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <TaskListPage />,
-  },
-])
+import { RouterProvider } from 'react-router-dom'
+import { router } from './router'
 
 export default function App() {
   return (
