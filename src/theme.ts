@@ -59,10 +59,17 @@ export const theme: Theme = createTheme({
           textTransform: 'none',
           padding: `${state.theme.spacing(1.25)} ${state.theme.spacing(2.5)}`,
           borderRadius: `${state.theme.spacing(3.5)}`,
+          fontSize: '0.875rem',
+          fontWeight: 500,
+          letterSpacing: '0.45px',
+          boxShadow: 'none',
         }),
         containedPrimary: state => ({
           backgroundColor: state.theme.palette.primary.main,
           color: state.theme.palette.primary.contrastText,
+        }),
+        containedError: state => ({
+          backgroundColor: state.theme.palette.error.dark,
         }),
       },
     },
@@ -72,6 +79,26 @@ export const theme: Theme = createTheme({
         paper: state => ({
           borderRadius: state.theme.spacing(2),
           boxShadow: state.theme.boxShadows.menu,
+        }),
+      },
+    },
+
+    MuiDialog: {
+      styleOverrides: {
+        root: {
+          background: 'rgba(16, 24, 40, 0.15)',
+          boxShadow: 'none',
+        },
+
+        paper: state => ({
+          borderRadius: state.theme.spacing(2),
+          background: white,
+          'box-shadow': state.theme.boxShadows.container,
+          maxWidth: state.theme.spacing(81),
+
+          [state.theme.breakpoints.down('sm')]: {
+            margin: state.theme.spacing(2),
+          },
         }),
       },
     },
@@ -93,6 +120,11 @@ export const theme: Theme = createTheme({
       fontSize: '1rem',
       lineHeight: '1.5rem',
       fontWeight: 600,
+    },
+    body1: {
+      fontSize: '1rem',
+      lineHeight: '1.5rem',
+      letterSpacing: '0.15px',
     },
     body2: {
       fontSize: '0.875rem',
