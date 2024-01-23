@@ -1,18 +1,21 @@
-import { Box, IconButton, Stack, Typography, styled } from '@mui/material'
-import { Task } from '../../../../types'
-import { TruncatedTypography } from '../../../../components/TruncatedTypography'
-import { StatusChip } from '../../../../components/StatusChip'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { Box, IconButton, Stack, Typography, styled } from '@mui/material'
 import { useState } from 'react'
 import { DateLabel } from '../../../../components/DateLabel'
+import { StatusChip } from '../../../../components/StatusChip'
+import { TruncatedTypography } from '../../../../components/TruncatedTypography'
+import { Task } from '../../../../types'
 import { TaskCardMenu } from '../TaskCardMenu'
 
 type Props = {
   task: Task
+  onOpenHistory: () => void
+  onEdit: () => void
+  onDelete: () => void
 }
 
-export const TaskCard = ({ task }: Props) => {
-  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+export const TaskCard = ({ task, onOpenHistory, onEdit, onDelete }: Props) => {
+  const [menuAnchor, setMenuAnchor] = useState<HTMLElement | null>(null)
 
   return (
     <Container>
@@ -26,18 +29,18 @@ export const TaskCard = ({ task }: Props) => {
           <StatusChip size="small" status={task.status} />
           <MenuTriggerIconButton
             size="small"
-            onClick={event => setAnchorEl(event.currentTarget)}
+            onClick={event => setMenuAnchor(event.currentTarget)}
           >
             <MoreVertIcon />
           </MenuTriggerIconButton>
 
           <TaskCardMenu
-            anchorEl={anchorEl}
-            open={!!anchorEl}
-            onClose={() => setAnchorEl(null)}
-            onOpenHistory={() => null} // TODO: Implement history modal
-            onEdit={() => null} // TODO: Implement edit task
-            onDelete={() => console.log('Delete')} // TODO: Implement delete task
+            anchorEl={menuAnchor}
+            open={!!menuAnchor}
+            onClose={() => setMenuAnchor(null)}
+            onOpenHistory={onOpenHistory}
+            onEdit={onEdit}
+            onDelete={onDelete}
           />
         </Box>
       </Header>
