@@ -40,6 +40,7 @@ export const theme: Theme = createTheme({
           padding: `${state.theme.spacing(1.25)} ${state.theme.spacing(2)}`,
           fontSize: '1rem',
           border: `1px solid`,
+          boxShadow: '0px 2px 2px 0px rgba(16, 24, 40, 0.05)',
           borderColor: state.theme.palette.grey[300],
           background: state.theme.palette.background.paper,
           '::placeholder': {
