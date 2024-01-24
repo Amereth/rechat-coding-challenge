@@ -55,9 +55,6 @@ export const AddTaskForm = () => {
       <form onSubmit={onSubmit}>
         <FormControl fullWidth>
           <InputBase
-            inputProps={{
-              minLength: 4,
-            }}
             placeholder="Title"
             value={formState.title}
             onChange={event =>
@@ -66,7 +63,6 @@ export const AddTaskForm = () => {
                 title: event.target.value,
               }))
             }
-            error={true}
             sx={{ mt: spacing(3) }}
           />
           {isSubmitted && (
