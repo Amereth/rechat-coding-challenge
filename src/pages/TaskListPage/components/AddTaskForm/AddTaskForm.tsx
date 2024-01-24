@@ -8,56 +8,27 @@ import {
 } from '@mui/material'
 import { FileIcon } from '../../../../assets/FileIcon'
 import { Add } from '@mui/icons-material'
-import { FormEvent, useState } from 'react'
 import { useTaskStorage } from '../../../../hooks/useTaskStorage'
-import { Task } from '../../../../types'
 import { createTask } from './utils'
 import { FormContainer } from '../../../../components/FormContainer'
-import {
-  validateDescription,
-  validateTitle,
-} from '../../../../utils/validation'
+import { useTaskFormHelper } from '../../../../hooks/useTaskFormHelper'
 
 export const AddTaskForm = () => {
   const { spacing } = useTheme()
   const { addTask } = useTaskStorage()
 
-  const [formState, setFormState] = useState<
-    Pick<Task, 'title' | 'description'>
-  >({ title: '', description: '' })
+  const {
+    formValues,
+    onTitleChange,
+    onDescriptionChange,
+    titleError,
+    descriptionError,
+    handleSubmit,
+  } = useTaskFormHelper()
 
-  const [isSubmitted, setSubmitted] = useState(false)
-
-  const onTitleChange = (title: string) =>
-    setFormState(prevState => ({ ...prevState, title }))
-
-  const titleError = isSubmitted ? validateTitle(formState.title) : null
-
-  const onDescriptionChange = (description: string) =>
-    setFormState(prevState => ({ ...prevState, description }))
-
-  const descriptionError = isSubmitted
-    ? validateDescription(formState.description)
-    : null
-
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-    setSubmitted(true)
-
-    const isTaskValid =
-      !validateTitle(formState.title) &&
-      !validateDescription(formState.description)
-
-    if (!isTaskValid) return
-
-    addTask(createTask(formState))
-    reset()
-  }
-
-  const reset = () => {
-    setFormState({ title: '', description: '' })
-    setSubmitted(false)
-  }
+  const onSubmit = handleSubmit(values => {
+    addTask(createTask(values))
+  })
 
   return (
     <FormContainer
@@ -69,7 +40,7 @@ export const AddTaskForm = () => {
         <FormControl fullWidth error={!!titleError}>
           <InputBase
             placeholder="Title"
-            value={formState.title}
+            value={formValues.title}
             onChange={event => onTitleChange(event.target.value)}
             sx={{ mt: spacing(3) }}
           />
@@ -79,7 +50,7 @@ export const AddTaskForm = () => {
         <FormControl fullWidth error={!!descriptionError}>
           <InputBase
             placeholder="Description"
-            value={formState.description}
+            value={formValues.description}
             onChange={event => onDescriptionChange(event.target.value)}
             multiline
             rows={6}
