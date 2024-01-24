@@ -13,10 +13,10 @@ import { useTaskStorage } from '../../../../hooks/useTaskStorage'
 import { Task } from '../../../../types'
 import { createTask } from './utils'
 import { FormContainer } from '../../../../components/FormContainer'
-
-const isTitleValid = (title: string) => title.length >= 3 && title.length <= 100
-const isDescriptionValid = (title: string) =>
-  title.length >= 3 && title.length <= 100
+import {
+  validateDescription,
+  validateTitle,
+} from '../../../../utils/validation'
 
 export const AddTaskForm = () => {
   const { spacing } = useTheme()
@@ -28,12 +28,25 @@ export const AddTaskForm = () => {
 
   const [isSubmitted, setSubmitted] = useState(false)
 
+  const onTitleChange = (title: string) =>
+    setFormState(prevState => ({ ...prevState, title }))
+
+  const titleError = isSubmitted ? validateTitle(formState.title) : null
+
+  const onDescriptionChange = (description: string) =>
+    setFormState(prevState => ({ ...prevState, description }))
+
+  const descriptionError = isSubmitted
+    ? validateDescription(formState.description)
+    : null
+
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitted(true)
 
     const isTaskValid =
-      isTitleValid(formState.title) && isDescriptionValid(formState.description)
+      !validateTitle(formState.title) &&
+      !validateDescription(formState.description)
 
     if (!isTaskValid) return
 
@@ -53,46 +66,26 @@ export const AddTaskForm = () => {
       title="Add a new Task"
     >
       <form onSubmit={onSubmit}>
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!!titleError}>
           <InputBase
             placeholder="Title"
             value={formState.title}
-            onChange={event =>
-              setFormState(prevState => ({
-                ...prevState,
-                title: event.target.value,
-              }))
-            }
+            onChange={event => onTitleChange(event.target.value)}
             sx={{ mt: spacing(3) }}
           />
-          {isSubmitted && (
-            <FormHelperText error>
-              {!isTitleValid(formState.title) &&
-                'Title must be between 3 and 100 characters long'}
-            </FormHelperText>
-          )}
+          <FormHelperText error>{titleError}</FormHelperText>
         </FormControl>
 
-        <FormControl fullWidth>
+        <FormControl fullWidth error={!!descriptionError}>
           <InputBase
             placeholder="Description"
             value={formState.description}
-            onChange={event =>
-              setFormState(prevState => ({
-                ...prevState,
-                description: event.target.value,
-              }))
-            }
+            onChange={event => onDescriptionChange(event.target.value)}
             multiline
             rows={6}
             sx={{ mt: spacing(2) }}
           />
-          {isSubmitted && (
-            <FormHelperText error>
-              {!isDescriptionValid(formState.description) &&
-                'Description must be at least 10 characters long'}
-            </FormHelperText>
-          )}
+          <FormHelperText error>{descriptionError}</FormHelperText>
         </FormControl>
 
         <AddButton size="large" startIcon={<Add />} type="submit">

@@ -46,6 +46,15 @@ export const theme: Theme = createTheme({
             color: state.theme.palette.grey[600],
           },
         }),
+
+        error: state => ({
+          input: {
+            borderColor: state.theme.palette.error.main,
+          },
+          textarea: {
+            borderColor: state.theme.palette.error.main,
+          },
+        }),
       },
     },
 
