@@ -18,7 +18,7 @@ export const getTaskStatusColor = (
     blocked: palette.error.light,
     'in-qa': palette.warning.main,
     done: palette.info.light,
-    deployed: palette.success.dark,
+    deployed: palette.success.main,
   }
 
   return colorMap[status]
