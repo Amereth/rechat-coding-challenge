@@ -1,13 +1,19 @@
+import { TaskUpdatePage } from './pages/TaskUpdatePage/TaskUpdatePage'
 import { TaskListPage } from './pages/TaskListPage/TaskListPage'
 import { createBrowserRouter } from 'react-router-dom'
 
 export const routes = {
-  root: '/',
+  home: '/',
+  taskUpdate: '/:taskId',
 }
 
 export const router = createBrowserRouter([
   {
-    path: routes.root,
+    path: routes.home,
     element: <TaskListPage />,
+  },
+  {
+    path: routes.taskUpdate,
+    element: <TaskUpdatePage />,
   },
 ])

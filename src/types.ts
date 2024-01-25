@@ -11,6 +11,9 @@ export type Task = {
   title: string
   description: string
   status: TaskStatus
+  history: {
+    status: TaskStatus
+    timestamp: Date
+  }[]
   createdAt: Date
-  updatedAt: string | null
 }

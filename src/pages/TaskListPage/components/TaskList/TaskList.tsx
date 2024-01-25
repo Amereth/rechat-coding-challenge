@@ -6,12 +6,15 @@ import { TrashIcon } from '../../../../assets/TrashIcon'
 import { ConfirmDialog } from '../../../../components/ConfirmDialog'
 import { useState } from 'react'
 import { Task } from '../../../../types'
+import { generatePath, useNavigate } from 'react-router-dom'
+import { routes } from '../../../../router'
 
 type Props = {
   sx: SxProps
 }
 
 export const TaskList = ({ sx }: Props) => {
+  const navigate = useNavigate()
   const { tasks, deleteTask } = useTaskStorage()
 
   const [selectedTaskId, setActiveTaskId] = useState<Task['id'] | null>(null)
@@ -22,10 +25,12 @@ export const TaskList = ({ sx }: Props) => {
     <>
       <ConfirmDialog
         open={!!(selectedTaskId && deleteDialogOpen)}
-        onClose={() => setDeleteDialogOpen(false)}
+        onClose={() => {
+          setDeleteDialogOpen(false)
+          setActiveTaskId(null)
+        }}
         onConfirm={() => {
           if (selectedTaskId) deleteTask(selectedTaskId)
-          setActiveTaskId(null)
         }}
         icon={<TrashIcon />}
         title="Delete Task?"
@@ -46,8 +51,9 @@ export const TaskList = ({ sx }: Props) => {
               <TaskCard
                 key={task.id}
                 task={task}
-                onOpenHistory={() => null}
-                onEdit={() => null}
+                onEdit={() =>
+                  navigate(generatePath(routes.taskUpdate, { taskId: task.id }))
+                }
                 onDelete={() => {
                   setDeleteDialogOpen(true)
                   setActiveTaskId(task.id)

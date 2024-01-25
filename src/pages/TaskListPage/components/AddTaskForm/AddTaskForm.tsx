@@ -9,7 +9,7 @@ import {
 import { FileIcon } from '../../../../assets/FileIcon'
 import { Add } from '@mui/icons-material'
 import { useTaskStorage } from '../../../../hooks/useTaskStorage'
-import { createTask } from './utils'
+import { createTask } from '../../../../utils/createTask'
 import { FormContainer } from '../../../../components/FormContainer'
 import { useTaskFormHelper } from '../../../../hooks/useTaskFormHelper'
 

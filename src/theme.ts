@@ -5,6 +5,7 @@ declare module '@mui/material/styles' {
     boxShadows: {
       container: string
       menu: string
+      input: string
     }
   }
   // allow configuration using `createTheme`
@@ -12,6 +13,7 @@ declare module '@mui/material/styles' {
     boxShadows: {
       container: string
       menu: string
+      input: string
     }
   }
 }
@@ -31,6 +33,7 @@ export const theme: Theme = createTheme({
   boxShadows: {
     container: '0px 8px 48px -12px rgba(16, 24, 40, 0.15)',
     menu: '0px 10px 32px -4px rgba(0, 0, 0, 0.10), 0px 6px 14px -6px rgba(0, 0, 0, 0.12)',
+    input: '0px 2px 2px 0px rgba(16, 24, 40, 0.05)',
   },
   components: {
     MuiInputBase: {
@@ -40,7 +43,7 @@ export const theme: Theme = createTheme({
           padding: `${state.theme.spacing(1.25)} ${state.theme.spacing(2)}`,
           fontSize: '1rem',
           border: `1px solid`,
-          boxShadow: '0px 2px 2px 0px rgba(16, 24, 40, 0.05)',
+          boxShadow: state.theme.boxShadows.input,
           borderColor: state.theme.palette.grey[300],
           background: state.theme.palette.background.paper,
           '::placeholder': {
@@ -109,6 +112,16 @@ export const theme: Theme = createTheme({
           [state.theme.breakpoints.down('sm')]: {
             margin: state.theme.spacing(2),
           },
+        }),
+      },
+    },
+
+    MuiSelect: {
+      styleOverrides: {
+        select: state => ({
+          borderRadius: `${state.theme.spacing(3.5)}`,
+          boxShadow: state.theme.boxShadows.input,
+          backgroundColor: state.theme.palette.grey[50],
         }),
       },
     },
