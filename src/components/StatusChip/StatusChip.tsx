@@ -1,13 +1,16 @@
 import { Chip, ChipProps, useTheme } from '@mui/material'
 import { TaskStatus } from '../../types'
 import { hexToRgba } from '../../utils/hexToRgba'
-import { getTaskStatusColorMap } from '../../utils/getTaskStatusColorMap'
-import { getTaskStatusLabelMap } from '../../utils/getTaskStatusLabelMap'
+import { getTaskStatusColor } from '../../utils/getTaskStatusColor'
+import { getTaskStatusLabel } from '../../utils/getTaskStatusLabel'
 
 /*
  * The StatusChip component is a simple wrapper around the MUI Chip component.
  * It accepts a status prop and uses it to determine label, color and applies styles
  */
+
+// chip background color is same as text color but with 20% opacity
+const opacity = 0.2
 
 type Props = ChipProps & {
   status: TaskStatus
@@ -16,15 +19,14 @@ type Props = ChipProps & {
 export const StatusChip = ({ status, sx, ...props }: Props) => {
   const { palette } = useTheme()
 
-  const colorMap = getTaskStatusColorMap(palette)
-  const labelMap = getTaskStatusLabelMap()
+  const color = getTaskStatusColor(status, palette)
 
   return (
     <Chip
-      label={labelMap[status]}
+      label={getTaskStatusLabel(status)}
       sx={{
-        color: colorMap[status],
-        backgroundColor: hexToRgba(colorMap[status], 0.2),
+        color,
+        backgroundColor: hexToRgba(color, opacity),
         ...sx,
       }}
       {...props}
