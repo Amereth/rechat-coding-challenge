@@ -76,7 +76,7 @@ export const TaskUpdatePage = () => {
               value={formValues.description}
               onChange={event => onDescriptionChange(event.target.value)}
               multiline
-              rows={20}
+              rows={15}
               sx={{ mt: spacing(2) }}
             />
             <FormHelperText error>{descriptionError}</FormHelperText>
