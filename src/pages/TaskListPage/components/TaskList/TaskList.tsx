@@ -6,6 +6,7 @@ import { TrashIcon } from '../../../../assets/TrashIcon'
 import { ConfirmDialog } from '../../../../components/ConfirmDialog'
 import { useState } from 'react'
 import { Task } from '../../../../types'
+import { TaskHistory } from '../TaskHistory'
 import { generatePath, useNavigate } from 'react-router-dom'
 import { routes } from '../../../../router'
 
@@ -20,6 +21,7 @@ export const TaskList = ({ sx }: Props) => {
   const [selectedTaskId, setActiveTaskId] = useState<Task['id'] | null>(null)
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [historyDialogOpen, setHistoryDialogOpen] = useState(false)
 
   return (
     <>
@@ -40,6 +42,15 @@ export const TaskList = ({ sx }: Props) => {
         aria-label="Confirm task deletion"
       />
 
+      <TaskHistory
+        open={!!(selectedTaskId && historyDialogOpen)}
+        onClose={() => {
+          setHistoryDialogOpen(false)
+          setActiveTaskId(null)
+        }}
+        history={tasks.find(task => task.id === selectedTaskId)?.history}
+      />
+
       <Box sx={sx}>
         <Header variant="h2">Tasks</Header>
 
@@ -51,6 +62,10 @@ export const TaskList = ({ sx }: Props) => {
               <TaskCard
                 key={task.id}
                 task={task}
+                onOpenHistory={() => {
+                  setHistoryDialogOpen(true)
+                  setActiveTaskId(task.id)
+                }}
                 onEdit={() =>
                   navigate(generatePath(routes.taskUpdate, { taskId: task.id }))
                 }
