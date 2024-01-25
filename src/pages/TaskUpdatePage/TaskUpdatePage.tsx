@@ -22,6 +22,7 @@ import { getAllowedTaskStatusTransitions } from '../../utils/getAllowedStatusTra
 import { getTaskStatusLabel } from '../../utils/getTaskStatusLabel'
 import { createTask } from '../../utils/createTask'
 import { routes } from '../../router'
+import { isTaskFormDirty } from './utils/isTaskFormDirty'
 
 export const TaskUpdatePage = () => {
   const { spacing } = useTheme()
@@ -106,6 +107,7 @@ export const TaskUpdatePage = () => {
               startIcon={<Checkmark />}
               type="submit"
               fullWidth
+              disabled={!isTaskFormDirty(task, formValues)}
             >
               Save Changes
             </Button>
